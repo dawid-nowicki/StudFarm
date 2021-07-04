@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stadninexpol</title>
+    <link rel="stylesheet" th:href="@{style.css}"/>
+    <link rel="icon" th:href="@{img/logo.png}" type="image/icon type">
+
+
+</head>
+<body>
+<div>
+    <!--    header-->
+    <div>
+        <div th:replace="templates :: navbar"></div>
+    </div>
+    <!--body-->
+    <div class="body">
+        <div class="content">
+            <tr th:each="stable: ${stables}">
+                <div class="stable_record">
+
+                        <img class="stable_img" th:src="${stable.img}">
+
+                    <div class="stable_text">
+                        <h1 th:text="${stable.name}"></h1>
+                        <span th:text="${stable.description}"></span>
+                    </div>
+                </div>
+            </tr>
+        </div>
+    </div>
+    <!--    footer-->
+    <div>
+        <div th:replace="templates :: footer"></div>
+    </div>
+</div>
+
+
+</body>
+</html>

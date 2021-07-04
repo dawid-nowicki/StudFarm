@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stadninexpol</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="icon" th:href="@{imgs/logo.png}" type="image/icon type">
+    <link rel="stylesheet" th:href="@{style.css}"/>
+    <script th:inline="javascript">
+        function fun(horse) {
+            /*<![CDATA[*/
+            var datesAll = /*[[${dates}]]*/ null;
+            /*]]>*/
+
+            var horseFreeDates;
+
+            datesAll.forEach( (dates)=> {
+                if(dates[0] === horse)
+                {
+                    horseFreeDates= dates;
+                    document.getElementById(horse).style.opacity='0.2';
+
+                }else{
+                document.getElementById(dates[0]).style.display='none';
+                }
+        });
+            document.getElementById("dates_visible").style.visibility='visible';
+            document.getElementById("horse_picker_label").style.visibility='hidden';
+
+            var select = document.getElementById("dates");
+            horseFreeDates[1].forEach((date)=>{
+                var opt = document.createElement("option");
+                opt.value = date;
+                opt.textContent = date;
+                select.appendChild(opt);
+
+            });
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+<div>
+    <!--    header-->
+        <div>
+            <div th:replace="templates :: navbar"></div>
+        </div>
+        <!--body-->
+
+
+        <div class="body">
+            <div class="border_input_container" id="riding_container">
+                <form th:action="@{/reserve}" method="post" class="input_container" >
+                    <div class="message" th:if="${param.reserved}" >
+                        Reserved successfully!
+                    </div>
+                    <div class="error" th:if="${param.error}">
+                        Something went wrong :(
+                    </div>
+
+                    <div class="error" th:if="${param.validation_error}">
+                        Don't mess up!
+                    </div>
+
+                    <div id="horse_picker">
+                       <div id="horse_picker_label"> Choose horse: <br></div>
+                            <tr th:each="horse : ${horses}" >
+                                <label >
+                                        <img th:src="${horse.getImg()}" class="riding_img" th:id="${horse.getName()}">
+                                            <input hidden type="checkbox" th:value="${horse.getId()}" th:field="${rental.horse}"  th:id="${horse.getName()}" onclick="fun(this.id)">
+                                        <img/>
+                                </label>
+                            </tr>
+                   </div>
+                    <div id="dates_visible" style="visibility:hidden">
+                        <div id="chosen_horse">
+
+                        </div>
+                        <label for="dates">Choose from available dates</label>
+                            <select required id="dates" th:field="${rental.date}">
+
+                            </select>
+
+                    </div>
+                    <button class="btn_submit"  type="submit">reserve</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--    footer-->
+    <div>
+        <div th:replace="templates :: footer"></div>
+    </div>
+</body>
+</html>
+

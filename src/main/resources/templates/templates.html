@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" th:href="@{style.css}"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StudFarm</title>
+</head>
+<body>
+<div class="navbar" th:fragment="navbar" >
+
+    <div style="float: left">
+    <a  href="/">
+        <img  th:src="@{/imgs/logo.png}"  style=" width:80px ; height:80px; margin-left: 30px;">
+    </a>
+    </div>
+
+    <div>
+    <a class="navbar_link" th:style="${ #httpServletRequest.requestURI.toString().contains('stables') ? 'background-color:aliceblue' :'' } " href="/stables">Stables</a>
+    </div>
+    <div>
+    <a class="navbar_link" th:style="${ #httpServletRequest.requestURI.toString().contains('horses') ? 'background-color:aliceblue' :'' } " href="/horses">Horses</a>
+    </div>
+
+    <div sec:authorize="hasRole('ROLE_CLIENT')">
+        <a class="navbar_link" th:style="${ #httpServletRequest.requestURI.toString().contains('riding') ? 'background-color:aliceblue' :'' }  " href="/riding">Riding</a>
+    </div>
+
+    <div sec:authorize="hasRole('ROLE_CLIENT')">
+        <a class="navbar_link" th:style="${ #httpServletRequest.requestURI.toString().contains('rental') ? 'background-color:aliceblue' :'' }  " href="/rental">My rental</a>
+    </div>
+
+
+    <div sec:authorize="!isAuthenticated()">
+    <a class="log" href="/login">  Log in</a>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <a class="log" href="/singup">  Sing up</a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <a class="log" href="/logout">  Log out</a>
+    </div>
+
+</div>
+
+
+
+<div class="footer" th:fragment="footer">
+    <img id="footer_img" class="logo" th:src="@{/imgs/logo.png}"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stadninexpol</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="icon" th:href="@{imgs/logo.png}" type="image/icon type">
+    <link rel="stylesheet" th:href="@{style.css}"/>
+
+
+</head>
+<body>
+<div>
+    <!--    header-->
+    <div>
+        <div th:replace="templates :: navbar"></div>
+    </div>
+    <!--body-->
+    <div class="body">
+        <div class="content">
+
+            <tr th:each="rental: ${rentals}">
+                <div class="database_record">
+                    <div class="database_img">
+                        <img th:src="${rental.getHorse().getImg()}" >
+                    </div>
+                    <div class="database_text">
+                        <div class="column_text">
+                            Horse: <br>
+                            Date:<br>
+                        </div>
+                        <div class="column_text">
+                            <span th:text="${rental.getHorse().getName()}"></span> <br>
+                            <span th:text="${rental.getDate()}"></span> <br>
+                        </div>
+
+
+                    </div>
+                </div>
+            </tr>
+        </div>
+    </div>
+    <!--    footer-->
+    <div>
+        <div th:replace="templates :: footer"></div>
+    </div>
+</div>
+</body>
+</html>

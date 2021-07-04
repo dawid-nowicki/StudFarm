@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stadninexpol</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="icon" th:href="@{imgs/logo.png}" type="image/icon type">
+    <link rel="stylesheet" th:href="@{style.css}"/>
+
+
+</head>
+<body>
+<div>
+    <!--    header-->
+        <div>
+            <div th:replace="templates :: navbar"></div>
+        </div>
+        <!--body-->
+
+
+        <div class="body">
+            <div class="border_input_container">
+                <form th:action="@{/register}" method="post" class="input_container" >
+                    <div class="error" th:if="${param.error}">
+                        Email already exists in database!
+                    </div>
+                        <input required placeholder="Name"  class="input_values" type="text" th:field="${client.name}">
+                        <input required placeholder="Surname" class="input_values" type="text" th:field="${client.surname}">
+                        <input required placeholder="Email" class="input_values" type="email" th:field="${client.email}">
+                        <input required placeholder="Password"  class="input_values" type="text" th:field="*{client.password}" ></label> <br>
+
+                    <button class="btn_submit"  type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--    footer-->
+    <div>
+        <div th:replace="templates :: footer"></div>
+    </div>
+</body>
+</html>
+

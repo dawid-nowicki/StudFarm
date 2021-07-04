@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" th:href="@{style.css}"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stadninexpol</title>
+    <link rel="icon" th:href="@{imgs/logo.png}" type="image/icon type">
+
+
+</head>
+<body>
+<div>
+    <!--    header-->
+    <div>
+        <div th:replace="templates :: navbar"></div>
+    </div>
+    <!--body-->
+    <div class="body">
+        <div class="introduction">
+            Hello <br>
+            This is simple CRUD project created with java spring technology, based on mvc architecture.<br>
+            Source code available on <a href="https://github.com//dawid-nowicki/StudFarm">github </a>
+        </div>
+
+
+    </div>
+    <!--    footer-->
+    <div>
+        <div th:replace="templates :: footer"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
